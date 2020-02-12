@@ -7,7 +7,7 @@
     tools:context=".worldTraining">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageWord"
         android:layout_width="376dp"
         android:layout_height="248dp"
         android:layout_alignParentTop="true"
@@ -17,21 +17,19 @@
         android:layout_marginRight="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/love" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="142dp"
+        android:id="@+id/rusWord"
+        android:layout_width="284dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginEnd="138dp"
-        android:layout_marginRight="138dp"
-        android:layout_marginBottom="310dp"
-        android:text="Любовь"
+        android:layout_marginEnd="65dp"
+        android:layout_marginRight="65dp"
+        android:layout_marginBottom="306dp"
         android:textAlignment="center"
         android:textSize="36sp" />
 
@@ -50,7 +48,6 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_weight="1"
-            android:text="варз"
             android:textSize="18sp" />
 
         <Button
@@ -58,7 +55,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Муьгьуьбат"
             android:textSize="18sp" />
 
         <Button
@@ -68,7 +64,20 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_weight="1"
-            android:text="балкIан"
             android:textSize="18sp" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="27dp"
+        android:shape="ring"
+        android:visibility="gone"
+        android:text="Button" />
 </RelativeLayout>
