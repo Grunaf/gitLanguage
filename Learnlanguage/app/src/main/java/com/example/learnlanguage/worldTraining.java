@@ -56,6 +56,7 @@ public class worldTraining extends AppCompatActivity {
         db = langDatebaseHelper.getReadableDatabase();
         count = getCountDB();
         getValuesDB();
+        printBD();
     }
 
     public void getValuesDB() {
@@ -69,12 +70,15 @@ public class worldTraining extends AppCompatActivity {
             rusWord.setText(translate);
             image_word = cursor.getString(3);
             imagWord.setImageResource(R.drawable.love);
-            rand1 = random.nextInt(count);
-            while (rand1 == x) {
-                rand1 = random.nextInt(count-1);
-                if (rand1 != x) {
+            rand1 = random.nextInt(count)+1;
+            System.out.println("All is norm");
+            while (true) {
+                if (rand1 == x) {
+                    rand1 = random.nextInt(count)+1;
+                } else {
                     System.out.println(rand1);
                     cursor2 = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand1)}, null, null, null);
+                    System.out.println("break");
                     break;
                 }
             }
@@ -83,16 +87,20 @@ public class worldTraining extends AppCompatActivity {
                 System.out.println(word2);
                 bt2.setText(word2);
             }
-            rand2 = random.nextInt(count);
-            while ((rand2 == x) | (rand2 == rand1)) {
-                rand2 = random.nextInt(count-1);
-                if ((rand2 != x) & (rand2 != rand1)) {
+            rand2 = random.nextInt(count)+1;
+            System.out.println("All isn't norm");
+            while (true) {
+                System.out.println("hi" + rand2);
+                if ((rand2 == x) | (rand2 == rand1)) {
+                    rand2 = random.nextInt(count)+1;
+                    System.out.println("Rand2 " + rand2);
+                } else if ((rand2 != x) & (rand2 != rand1)) {
                     System.out.println(rand2);
                     cursor3 = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand2)}, null, null, null);
+                    System.out.println("break");
                     break;
                 }
             }
-            cursor3 = db.query("WORDS", new String[] {"_id","WORD", "TRANSLATE", "IMAGE_SRC"},"_id = ?", new String[] {String.valueOf(random.nextInt(count))}, null, null, null);
             if(cursor3.moveToFirst()) {
                 word3 = cursor3.getString(2);
                 bt3.setText(word3);
@@ -102,6 +110,7 @@ public class worldTraining extends AppCompatActivity {
             exit = true;
             System.out.println("Hi");
         }
+        System.out.println(x +" "+ rand1 + " " +rand2);
         x++;
     }
 
@@ -111,6 +120,17 @@ public class worldTraining extends AppCompatActivity {
             c++;
         }
         return c;
+    }
+
+    public void printBD() {
+        cursorCount = db.query("WORDS", new String[] {"_id","WORD", "TRANSLATE", "IMAGE_SRC"},null, null, null, null, null);
+        while (cursorCount.moveToNext()) {
+            System.out.println(
+                     "id: " + cursorCount.getInt(0)+ "\n"
+                    + "Word: " + cursorCount.getString(1)+ "\n"
+                    + "Translate: " + cursorCount.getString(2)+ "\n"
+                    + "Src: " + cursorCount.getString(3)+ "\n" );
+        }
     }
 
 }
