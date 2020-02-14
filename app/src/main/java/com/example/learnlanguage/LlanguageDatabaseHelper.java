@@ -19,8 +19,8 @@ class LlanguageDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(sql);
         insertWord(db,"Муьгьуьбат", "Любовь", "R.drawable.love");
-        insertWord(db,"килфет", "Семья", "../../res/drawable/family.jpg");
-        insertWord(db,"гада", "Мальчик", "../../res/drawable/boy.jpg");
+        insertWord(db,"килфет", "Семья", "R.drawable.family");
+        insertWord(db,"гада", "Мальчик", "R.drawable.boy");
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
