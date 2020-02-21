@@ -7,9 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -19,6 +17,7 @@ import android.widget.TextView;
 import java.util.Random;
 
 public class worldTraining extends AppCompatActivity {
+    public static boolean testOrTraining = false;
     Intent intent;
     Random random = new Random();
     SQLiteOpenHelper langDatebaseHelper;
@@ -29,7 +28,8 @@ public class worldTraining extends AppCompatActivity {
     Cursor cursorCount, cursor, cursor2, cursor3;
     boolean next = false, exit = false, canBool = true, updateBool = true,repeatBool= true;
     int[] busyX;
-    int id_arr = 0, c = 0, count, rand1, rand2, randomInt, x, o;
+    int maxRand;
+    int id_arr = 0, c = 0, count, rand1, rand2, randomInt, x, o, b;
     static int countRight = 0;
     static int countFalse = 0;
     Button bt1, bt2, bt3;
@@ -49,11 +49,44 @@ public class worldTraining extends AppCompatActivity {
         bt2 = findViewById(R.id.bt2);
         bt3 = findViewById(R.id.bt3);
         count = getCountDB();
+        maxRand = random.nextInt(count)+1;
         busyX = new int[count];
-        getValuesDB();
         printBD();
+        getValuesDB();
     }
-
+    public void getColorValues(String whichBt) {
+        if(b == 1) {
+            bt1.setTextColor(Color.parseColor("#FF4CAF50"));
+            switch(whichBt) {
+                case "bt2":
+                    bt2.setTextColor(Color.RED);
+                    break;
+                case "bt3":
+                    bt3.setTextColor(Color.RED);
+                    break;
+            }
+        } else if(b == 2) {
+            bt2.setTextColor(Color.parseColor("#FF4CAF50"));
+            switch(whichBt) {
+                case "bt1":
+                    bt1.setTextColor(Color.RED);
+                    break;
+                case "bt3":
+                    bt3.setTextColor(Color.RED);
+                    break;
+            }
+        } else if(b == 3) {
+            bt3.setTextColor(Color.parseColor("#FF4CAF50"));
+            switch(whichBt) {
+                case "bt2":
+                    bt2.setTextColor(Color.RED);
+                    break;
+                case "bt1":
+                    bt1.setTextColor(Color.RED);
+                    break;
+            }
+        }
+    }
     public void verifyValues(View v) {
         if(canBool) {
             switch (v.getId()) {
@@ -62,7 +95,7 @@ public class worldTraining extends AppCompatActivity {
                         bt1.setTextColor(Color.parseColor("#FF4CAF50"));
                         countRight++;
                     } else {
-                        bt1.setTextColor(Color.RED);
+                        getColorValues("bt1");
                         countFalse++;
                     }
                     break;
@@ -71,8 +104,7 @@ public class worldTraining extends AppCompatActivity {
                         bt2.setTextColor(Color.parseColor("#FF4CAF50"));
                         countRight++;
                     } else {
-                        bt2.setTextColor(Color.RED);
-                        bt1.setTextColor(Color.parseColor("#FF4CAF50"));
+                        getColorValues("bt2");
                         countFalse++;
                     }
                     break;
@@ -81,8 +113,7 @@ public class worldTraining extends AppCompatActivity {
                         bt3.setTextColor(Color.parseColor("#FF4CAF50"));
                         countRight++;
                     } else {
-                        bt3.setTextColor(Color.RED);
-                        bt1.setTextColor(Color.parseColor("#FF4CAF50"));
+                        getColorValues("bt3");
                         countFalse++;
                     }
                     break;
@@ -99,52 +130,65 @@ public class worldTraining extends AppCompatActivity {
             bt1.setTextColor(Color.BLACK);
             bt2.setTextColor(Color.BLACK);
             bt3.setTextColor(Color.BLACK);
+            bt1.setText("");
+            bt2.setText("");
+            bt3.setText("");
             getValuesDB();
             btNext.setVisibility(View.INVISIBLE);
             canBool = true;
         } else {
             updateBool = true;
+            testOrTraining = true;
             startActivity(intent);
+            id_arr = 0;
         }
     }
 
+
     public void getValuesDB() {
         freeX();
-        System.out.println(count);
         cursor = db.query("WORDS", new String[] {"_id","WORD", "TRANSLATE", "IMAGE_SRC"},"_id = ?", new String[] {String.valueOf(x)}, null, null, null);
         if (cursor.moveToFirst()){
-            wordTrue = cursor.getString(2);
-            bt1.setText(wordTrue);
-            translate = cursor.getString(1);
+            b = random.nextInt(3)+1;
+            translate = cursor.getString(2);
             rusWord.setText(translate);
             image_word = cursor.getString(3);
-            imagWord.setImageResource(R.drawable.love);
-            rand1 = random.nextInt(count)+1;
+            imagWord.setImageResource(getResources().getIdentifier(image_word, "drawable", getPackageName()));
+            if(b == 1) {
+                wordTrue = cursor.getString(1);
+                bt1.setText(wordTrue);
+            } else if(b == 2) {
+                wordTrue = cursor.getString(1);
+                bt2.setText(wordTrue);
+            } else {
+                wordTrue = cursor.getString(1);
+                bt3.setText(wordTrue);
+            }
+            rand1 = setMaxRand();
             while (true) {
                 if (rand1 == x) {
-                    rand1 = random.nextInt(count)+1;
+                    rand1 = setMaxRand();
                 } else {
                     cursor2 = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand1)}, null, null, null);
                     break;
                 }
             }
             if(cursor2.moveToFirst()) {
-                word2 = cursor2.getString(2);
-                System.out.println(word2);
-                bt2.setText(word2);
+                word2 = cursor2.getString(1);
+                setValueBt(word2);
             }
-            rand2 = random.nextInt(count)+1;
+            rand2 = setMaxRand();
             while (true) {
                 if ((rand2 == x) | (rand2 == rand1)) {
-                    rand2 = random.nextInt(count)+1;
+                    rand2 = setMaxRand();
                 } else if ((rand2 != x) & (rand2 != rand1)) {
                     cursor3 = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand2)}, null, null, null);
                     break;
                 }
             }
             if(cursor3.moveToFirst()) {
-                word3 = cursor3.getString(2);
-                bt3.setText(word3);
+                word3 = cursor3.getString(1);
+                setValueBt(word3);
             }
         }
         else {
@@ -160,7 +204,15 @@ public class worldTraining extends AppCompatActivity {
         }
         return c;
     }
-
+    public void setValueBt(String wrd) {
+        if(bt1.getText() == "") {
+            bt1.setText(wrd);
+        } else if(bt2.getText() == "") {
+            bt2.setText(wrd);
+        } else if(bt3.getText() == "") {
+            bt3.setText(wrd);
+        }
+    }
     public void printBD() {
         cursorCount = db.query("WORDS", new String[] {"_id","WORD", "TRANSLATE", "IMAGE_SRC"},null, null, null, null, null);
         while (cursorCount.moveToNext()) {
@@ -171,33 +223,39 @@ public class worldTraining extends AppCompatActivity {
                             + "Src: " + cursorCount.getString(3)+ "\n" );
         }
     }
-
+    public int setMaxRand() {
+        int y;
+        if (maxRand+5 >= count) {
+            y = maxRand - random.nextInt(6);
+        } else {
+            y = random.nextInt(6) + maxRand;
+        }
+        return y;
+    }
     public void freeX() {
-        x =random.nextInt(count)+1;
-        while(repeatBool) {
+        x = setMaxRand();
+        while (repeatBool) {
             for (int intX : busyX) {
-                System.out.println("IntX "+ intX + " x " + x);
+                System.out.println("IntX " + intX + " x " + x);
                 if (x == intX) {
-                    System.out.println("if");
                     o++;
                     break;
                 }
             }
-            if(o==0) {
+            if (o == 0) {
                 System.out.println("Херня получае ");
                 busyX[id_arr] = x;
                 id_arr++;
-                if (id_arr == count) {
-                    System.out.println("Херня получается " + count +" "+ id_arr);
+                if (id_arr == 5) {
+                    System.out.println("Херня получается " + count + " " + id_arr);
                     updateBool = false;
                 }
                 break;
             } else {
-                x =random.nextInt(count)+1;
+                x = setMaxRand();
             }
             o = 0;
         }
         o = 0;
     }
-
 }

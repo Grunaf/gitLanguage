@@ -18,6 +18,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.worlds_training:
                 intent = new Intent(this, worldTraining.class);
                 startActivity(intent);
+                break;
+            case R.id.Test:
+                intent = new Intent(this, activityTest.class);
+                startActivity(intent);
+                break;
         }
     }
 }

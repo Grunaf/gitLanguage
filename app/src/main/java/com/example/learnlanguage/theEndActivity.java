@@ -19,8 +19,19 @@ public class theEndActivity extends AppCompatActivity {
         countRight = findViewById(R.id.countRight);
         countFalse = findViewById(R.id.countFalse);
         header.setText("Тренировка закончена");
-        countRight.setText("Правильно: " + worldTraining.countRight);
-        countFalse.setText("Не правильно: " + worldTraining.countFalse);
+        if(activityTest.testOrTraining) {
+            countRight.setText("Правильно: " + activityTest.countRight);
+            countFalse.setText("Не правильно: " + activityTest.countFalse);
+            activityTest.countRight = 0;
+            activityTest.countFalse = 0;
+            activityTest.testOrTraining = false;
+        } else{
+            countRight.setText("Правильно: " + worldTraining.countRight);
+            countFalse.setText("Не правильно: " + worldTraining.countFalse);
+            worldTraining.countRight = 0;
+            worldTraining.countFalse = 0;
+            worldTraining.testOrTraining = false;
+        }
     }
 
     public void goHome(View v) {
