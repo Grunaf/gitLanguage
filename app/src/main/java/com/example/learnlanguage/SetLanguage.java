@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class SetLanguage extends AppCompatActivity {
-    static String language = "";
+    public static String language = "";
     Intent intent;
     Button bt1;
     Button bt2;
