@@ -24,7 +24,7 @@ public class worldTraining extends AppCompatActivity {
     SQLiteDatabase db;
     ImageView imagWord;
     TextView rusWord;
-    String wordTrue, word2, word3, image_word, translate;
+    String translateTrue, translate2, translate3, image_word, word;
     Cursor cursorCount, cursor, cursor2, cursor3;
     boolean next = false, exit = false, canBool = true, updateBool = true,repeatBool= true;
     int[] busyX;
@@ -40,8 +40,11 @@ public class worldTraining extends AppCompatActivity {
         intent = new Intent(this, theEndActivity.class);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_world_training);
+        System.out.println("sdds");
         langDatebaseHelper = new LlanguageDatabaseHelper(this);
+        System.out.println("sdds");
         db = langDatebaseHelper.getReadableDatabase();
+        System.out.println("sdds");
         rusWord = findViewById(R.id.rusWord);
         imagWord = findViewById(R.id.imageWord);
         btNext = findViewById(R.id.btNext);
@@ -91,7 +94,7 @@ public class worldTraining extends AppCompatActivity {
         if(canBool) {
             switch (v.getId()) {
                 case R.id.bt1:
-                    if (bt1.getText() == wordTrue) {
+                    if (bt1.getText() == translateTrue) {
                         bt1.setTextColor(Color.parseColor("#FF4CAF50"));
                         countRight++;
                     } else {
@@ -100,7 +103,7 @@ public class worldTraining extends AppCompatActivity {
                     }
                     break;
                 case R.id.bt2:
-                    if (bt2.getText() == wordTrue) {
+                    if (bt2.getText() == translateTrue) {
                         bt2.setTextColor(Color.parseColor("#FF4CAF50"));
                         countRight++;
                     } else {
@@ -109,7 +112,7 @@ public class worldTraining extends AppCompatActivity {
                     }
                     break;
                 case R.id.bt3:
-                    if (bt3.getText() == wordTrue) {
+                    if (bt3.getText() == translateTrue) {
                         bt3.setTextColor(Color.parseColor("#FF4CAF50"));
                         countRight++;
                     } else {
@@ -147,49 +150,62 @@ public class worldTraining extends AppCompatActivity {
 
     public void getValuesDB() {
         freeX();
-        cursor = db.query("WORDS", new String[] {"_id","WORD", "TRANSLATE", "IMAGE_SRC"},"_id = ?", new String[] {String.valueOf(x)}, null, null, null);
+        if (SetLanguage.language.equals("lezgi") ) {
+            System.out.println("1 " + SetLanguage.language);
+            cursor = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(x)}, null, null, null);
+        } else {
+            cursor = db.query("WORDS", new String[]{"_id", "WORD","TRANSLATE_LAKSY", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(x)}, null, null, null);
+        }
         if (cursor.moveToFirst()){
             b = random.nextInt(3)+1;
-            translate = cursor.getString(2);
-            rusWord.setText(translate);
+            word = cursor.getString(1);
+            rusWord.setText(word);
             image_word = cursor.getString(3);
             imagWord.setImageResource(getResources().getIdentifier(image_word, "drawable", getPackageName()));
+            translateTrue = cursor.getString(2);
             if(b == 1) {
-                wordTrue = cursor.getString(1);
-                bt1.setText(wordTrue);
+                bt1.setText(translateTrue);
             } else if(b == 2) {
-                wordTrue = cursor.getString(1);
-                bt2.setText(wordTrue);
+                bt2.setText(translateTrue);
             } else {
-                wordTrue = cursor.getString(1);
-                bt3.setText(wordTrue);
+                bt3.setText(translateTrue);
             }
             rand1 = setMaxRand();
             while (true) {
                 if (rand1 == x) {
                     rand1 = setMaxRand();
                 } else {
-                    cursor2 = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand1)}, null, null, null);
+                    if (SetLanguage.language.equals("lezgi") ) {
+                        cursor2 = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand1)}, null, null, null);
+                    } else {
+                        cursor2 = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE_LAKSY", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand1)}, null, null, null);
+                    }
                     break;
                 }
             }
+            System.out.println("4 " + SetLanguage.language);
             if(cursor2.moveToFirst()) {
-                word2 = cursor2.getString(1);
-                setValueBt(word2);
+                translate2 = cursor2.getString(2);
+                setValueBt(translate2);
             }
             rand2 = setMaxRand();
             while (true) {
                 if ((rand2 == x) | (rand2 == rand1)) {
                     rand2 = setMaxRand();
                 } else if ((rand2 != x) & (rand2 != rand1)) {
-                    cursor3 = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand2)}, null, null, null);
+                    if (SetLanguage.language.equals("lezgi") ) {
+                        cursor3 = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand2)}, null, null, null);
+                    } else {
+                        cursor3 = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE_LAKSY", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand2)}, null, null, null);
+                    }
                     break;
                 }
             }
             if(cursor3.moveToFirst()) {
-                word3 = cursor3.getString(1);
-                setValueBt(word3);
+                translate3 = cursor3.getString(2);
+                setValueBt(translate3);
             }
+            System.out.println("4 " + SetLanguage.language);
         }
         else {
             exit = true;
@@ -198,7 +214,7 @@ public class worldTraining extends AppCompatActivity {
     }
 
     public int getCountDB() {
-        cursorCount = db.query("WORDS", new String[] {"_id","WORD", "TRANSLATE", "IMAGE_SRC"},null, null, null, null, null);
+        cursorCount = db.query("WORDS", new String[] {"_id"},null, null, null, null, null);
         while (cursorCount.moveToNext()) {
             c++;
         }
@@ -214,13 +230,14 @@ public class worldTraining extends AppCompatActivity {
         }
     }
     public void printBD() {
-        cursorCount = db.query("WORDS", new String[] {"_id","WORD", "TRANSLATE", "IMAGE_SRC"},null, null, null, null, null);
+        cursorCount = db.query("WORDS", new String[] {"_id","WORD", "TRANSLATE", "TRANSLATE_LAKSY","IMAGE_SRC"},null, null, null, null, null);
         while (cursorCount.moveToNext()) {
             System.out.println(
                     "id: " + cursorCount.getInt(0)+ "\n"
                             + "Word: " + cursorCount.getString(1)+ "\n"
                             + "Translate: " + cursorCount.getString(2)+ "\n"
-                            + "Src: " + cursorCount.getString(3)+ "\n" );
+                            + "Translate laksy: " + cursorCount.getString(3)+ "\n"
+                            + "Src: " + cursorCount.getString(4)+ "\n" );
         }
     }
     public int setMaxRand() {

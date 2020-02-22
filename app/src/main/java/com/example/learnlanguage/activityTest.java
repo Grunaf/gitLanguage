@@ -98,7 +98,11 @@ public class activityTest extends AppCompatActivity {
 
     public void getValuesDB() {
         freeX();
-        cursor = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE"}, "_id = ?", new String[]{String.valueOf(x)}, null, null, null);
+        if (SetLanguage.language.equals("lezgi") ) {
+            cursor = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(x)}, null, null, null);
+        } else {
+            cursor = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE_LAKSY", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(x)}, null, null, null);
+        }
         if (cursor.moveToFirst()) {
             valuesTrue = cursor.getString(1);
             WordRuss.setText(cursor.getString(2));
@@ -149,7 +153,7 @@ public class activityTest extends AppCompatActivity {
 
 
     public int getCountDB() {
-        cursorCount = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE", "IMAGE_SRC"}, null, null, null, null, null);
+        cursorCount = db.query("WORDS", new String[]{"_id"}, null, null, null, null, null);
         while (cursorCount.moveToNext()) {
             c++;
         }
@@ -157,13 +161,14 @@ public class activityTest extends AppCompatActivity {
     }
 
     public void printBD() {
-        cursorCount = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE", "IMAGE_SRC"}, null, null, null, null, null);
+        cursorCount = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE","TRANSLATE_LAKSY", "IMAGE_SRC"}, null, null, null, null, null);
         while (cursorCount.moveToNext()) {
             System.out.println(
-                    "id: " + cursorCount.getInt(0) + "\n"
-                            + "Word: " + cursorCount.getString(1) + "\n"
-                            + "Translate: " + cursorCount.getString(2) + "\n"
-                            + "Src: " + cursorCount.getString(3) + "\n");
+                    "id: " + cursorCount.getInt(0)+ "\n"
+                            + "Word: " + cursorCount.getString(1)+ "\n"
+                            + "Translate: " + cursorCount.getString(2)+ "\n"
+                            + "Translate laksy: " + cursorCount.getString(3)+ "\n"
+                            + "Src: " + cursorCount.getString(4)+ "\n" );
         }
     }
 }
