@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 class LlanguageDatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "learlanguage";
-    private static final int DB_VERSION = 30;
+    private static final int DB_VERSION = 31;
     private String sql = "CREATE TABLE WORDS (_id INTEGER PRIMARY KEY AUTOINCREMENT, WORD TEXT, TRANSLATE TEXT, IMAGE_SRC TEXT);";
 
     LlanguageDatabaseHelper(Context context) {
@@ -48,16 +48,16 @@ class LlanguageDatabaseHelper extends SQLiteOpenHelper {
         updateWord(db,4,"Битва", "йагъйагъун", "battle", "биябу");
         updateWord(db,5,"Лягушка", "къиб", "frog", "оьрватӀи");
         updateWord(db,6,"Медведь", "сев", "bear", "цуша");
-        updateWord(db,7,"Бабочка", "чепелукь", "butterfly", "цӀицӀимкӀала");
+        updateWord(db,7,"Бабочка", "чепелукь", "butterfly", "ц1иц1имк1ала");
         updateWord(db,8,"Курица", "верч", "chicken", "аьнакӀи");
         updateWord(db,9,"Лицо", "чин", "face", "лажин");
-        updateWord(db,10,"Лиса", "сик1", "fox", "цулчӀа");
+        updateWord(db,10,"Лиса", "сик1", "fox", "цулч1а");
         updateWord(db,11,"Лев", "аслан", "lion", "аслан");
         updateWord(db,12,"Мёд", "вирт", "honey", "мачча");
         updateWord(db,13,"Лёд", "мурк", "ice", "мик1");
         updateWord(db,14,"Луна", "варз", "moon", "барз");
-        updateWord(db,15,"Мышь", "кьиф", "mouse", "кӀулу");
-        updateWord(db,16,"Ладонь", "капан юкь", "palms", "витӀяихъ");
+        updateWord(db,15,"Мышь", "кьиф", "mouse", "к1улу");
+        updateWord(db,16,"Ладонь", "капан юкь", "palms", "вит1яихъ");
         updateWord(db,17,"Люди", "инсан", "people", "инсан");
         updateWord(db,18,"Крыша", "къав", "roofs","магъи");
         updateWord(db,19,"Ложка", "т1ур", "spoon", "къуса");

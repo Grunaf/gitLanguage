@@ -25,14 +25,13 @@ public class activityTest extends AppCompatActivity {
     SQLiteDatabase db;
     TextView WordRuss;
     TextView WordTrue;
-    CharSequence word;
+    TextView headerText;
     Cursor cursorCount, cursor;
-    String valuesTrue, getAnswer;
-    CharSequence wordInBt;
-    boolean next = false, exit = false, canBool = true, updateBool = true, repeatBool = true, first = true;
+    String translateTrue, getAnswer;
+    boolean canBool = true, updateBool = true, repeatBool = true, first = true;
     int[] busyX;
     int maxRand;
-    int id_arr = 0, c = 0, count, rand1, rand2, randomInt, x, o, b;
+    int id_arr = 0, c = 0, count, x, o;
     static int countRight = 0;
     static int countFalse = 0;
     Button btNext;
@@ -44,6 +43,12 @@ public class activityTest extends AppCompatActivity {
         setContentView(R.layout.activity_test);
         langDatebaseHelper = new LlanguageDatabaseHelper(this);
         db = langDatebaseHelper.getReadableDatabase();
+        headerText = findViewById(R.id.HeaderTest);
+        if(SetLanguage.language.equals("lezgi")) {
+            headerText.setText("Переведите на лезгинский");
+        } else {
+            headerText.setText("Переведите на лакский");
+        }
         WordRuss = findViewById(R.id.WordRuss);
         WordTrue = findViewById(R.id.WordTrue);
         btNext = findViewById(R.id.btNext);
@@ -56,7 +61,7 @@ public class activityTest extends AppCompatActivity {
 
     public void verifyValues() {
         getAnswer = String.valueOf(WordTrue.getText()).toLowerCase();
-        if (valuesTrue.equals(getAnswer)) {
+        if (translateTrue.equals(getAnswer)) {
             System.out.println(getAnswer);
             WordTrue.setTextColor(Color.parseColor("#FF4CAF50"));
             countRight++;
@@ -67,7 +72,6 @@ public class activityTest extends AppCompatActivity {
     }
 
     public void updateValues(View v) {
-        System.out.println(wordInBt);
         if (first) {
             System.out.println("Ok");
             if (updateBool) {
@@ -104,8 +108,8 @@ public class activityTest extends AppCompatActivity {
             cursor = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE_LAKSY", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(x)}, null, null, null);
         }
         if (cursor.moveToFirst()) {
-            valuesTrue = cursor.getString(1);
-            WordRuss.setText(cursor.getString(2));
+            translateTrue = cursor.getString(2);
+            WordRuss.setText(cursor.getString(1));
         }
     }
     public int setMaxRand() {
