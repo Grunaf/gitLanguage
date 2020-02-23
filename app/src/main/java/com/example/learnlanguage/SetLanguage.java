@@ -11,10 +11,11 @@ import android.widget.Button;
 public class SetLanguage extends AppCompatActivity {
     public static String language = "";
     Intent intent;
-    Button bt1;
-    Button bt2;
-    Button bt3;
+    static Button bt1;
+    static Button bt2;
+    static Button bt3;
     boolean canBool = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,41 +23,32 @@ public class SetLanguage extends AppCompatActivity {
         bt1 = findViewById(R.id.laksky);
         bt2 = findViewById(R.id.lezgi);
         bt3 = findViewById(R.id.avar);
+        intent = new Intent(this, MainActivity.class);
     }
 
     public void onClickBtn(View view) {
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.laksky:
                 System.out.println(language);
-                if (language.equals("")) {
-                    language= "laksky";
-                    bt1.setTextColor(Color.parseColor("#FF5722"));
-                    canBool = true;
-                    break;
-                }
+                language = "laksky";
+                bt1.setTextColor(Color.parseColor("#FF5722"));
+                bt3.setTextColor(Color.BLACK);
+                bt2.setTextColor(Color.BLACK);
+                startActivity(intent);
                 break;
             case R.id.lezgi:
-                if (language.equals("")) {
-                    language= "lezgi";
-                    bt2.setTextColor(Color.parseColor("#FF5722"));
-                    canBool = true;
-                    break;
-                }
+                language = "lezgi";
+                bt2.setTextColor(Color.parseColor("#FF5722"));
+                bt3.setTextColor(Color.BLACK);
+                bt1.setTextColor(Color.BLACK);
+                startActivity(intent);
                 break;
             case R.id.avar:
-                if (language.equals("")) {
-                    language= "avar";
-                    bt3.setTextColor(Color.parseColor("#FF5722"));
-                    canBool = true;
-                    break;
-                }
-                break;
-            case R.id.done:
-                if (canBool) {
-                    intent = new Intent(this, MainActivity.class);
-                    startActivity(intent);
-
-                }
+                language = "avar";
+                bt3.setTextColor(Color.parseColor("#FF5722"));
+                bt2.setTextColor(Color.BLACK);
+                bt1.setTextColor(Color.BLACK);
+                startActivity(intent);
                 break;
         }
     }

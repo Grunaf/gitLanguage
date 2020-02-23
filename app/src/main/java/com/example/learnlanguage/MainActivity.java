@@ -3,6 +3,7 @@ package com.example.learnlanguage;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
@@ -12,6 +13,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SetLanguage.bt2.setTextColor(Color.BLACK);
+        SetLanguage.bt3.setTextColor(Color.BLACK);
+        SetLanguage.bt1.setTextColor(Color.BLACK);
     }
     public void onClickBt(View v) {
         switch(v.getId()) {

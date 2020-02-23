@@ -46,8 +46,10 @@ public class activityTest extends AppCompatActivity {
         headerText = findViewById(R.id.HeaderTest);
         if(SetLanguage.language.equals("lezgi")) {
             headerText.setText("Переведите на лезгинский");
-        } else {
+        } else if(SetLanguage.language.equals("laksky")){
             headerText.setText("Переведите на лакский");
+        } else {
+            headerText.setText("Переведите на аварский");
         }
         WordRuss = findViewById(R.id.WordRuss);
         WordTrue = findViewById(R.id.WordTrue);
