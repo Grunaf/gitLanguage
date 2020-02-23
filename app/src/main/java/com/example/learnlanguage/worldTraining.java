@@ -40,11 +40,8 @@ public class worldTraining extends AppCompatActivity {
         intent = new Intent(this, theEndActivity.class);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_world_training);
-        System.out.println("sdds");
         langDatebaseHelper = new LlanguageDatabaseHelper(this);
-        System.out.println("sdds");
         db = langDatebaseHelper.getReadableDatabase();
-        System.out.println("sdds");
         rusWord = findViewById(R.id.rusWord);
         imagWord = findViewById(R.id.imageWord);
         btNext = findViewById(R.id.btNext);
@@ -151,10 +148,11 @@ public class worldTraining extends AppCompatActivity {
     public void getValuesDB() {
         freeX();
         if (SetLanguage.language.equals("lezgi") ) {
-            System.out.println("1 " + SetLanguage.language);
             cursor = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(x)}, null, null, null);
-        } else {
+        } else if(SetLanguage.language.equals("laksy")){
             cursor = db.query("WORDS", new String[]{"_id", "WORD","TRANSLATE_LAKSY", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(x)}, null, null, null);
+        } else if(SetLanguage.language.equals("avar")) {
+            cursor = db.query("WORDS", new String[]{"_id", "WORD","TRANSLATE_AVAR", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(x)}, null, null, null);
         }
         if (cursor.moveToFirst()){
             b = random.nextInt(3)+1;
@@ -177,8 +175,10 @@ public class worldTraining extends AppCompatActivity {
                 } else {
                     if (SetLanguage.language.equals("lezgi") ) {
                         cursor2 = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand1)}, null, null, null);
-                    } else {
-                        cursor2 = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE_LAKSY", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand1)}, null, null, null);
+                    } else if(SetLanguage.language.equals("laksy")){
+                        cursor2 = db.query("WORDS", new String[]{"_id", "WORD","TRANSLATE_LAKSY", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand1)}, null, null, null);
+                    } else if(SetLanguage.language.equals("avar")) {
+                        cursor2 = db.query("WORDS", new String[]{"_id", "WORD","TRANSLATE_AVAR", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand1)}, null, null, null);
                     }
                     break;
                 }
@@ -195,8 +195,10 @@ public class worldTraining extends AppCompatActivity {
                 } else if ((rand2 != x) & (rand2 != rand1)) {
                     if (SetLanguage.language.equals("lezgi") ) {
                         cursor3 = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand2)}, null, null, null);
-                    } else {
-                        cursor3 = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE_LAKSY", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand2)}, null, null, null);
+                    } else if(SetLanguage.language.equals("laksy")){
+                        cursor3 = db.query("WORDS", new String[]{"_id", "WORD","TRANSLATE_LAKSY", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand2)}, null, null, null);
+                    } else if(SetLanguage.language.equals("avar")) {
+                        cursor3 = db.query("WORDS", new String[]{"_id", "WORD","TRANSLATE_AVAR", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand2)}, null, null, null);
                     }
                     break;
                 }
@@ -230,14 +232,15 @@ public class worldTraining extends AppCompatActivity {
         }
     }
     public void printBD() {
-        cursorCount = db.query("WORDS", new String[] {"_id","WORD", "TRANSLATE", "TRANSLATE_LAKSY","IMAGE_SRC"},null, null, null, null, null);
+        cursorCount = db.query("WORDS", new String[] {"_id","WORD", "TRANSLATE", "TRANSLATE_LAKSY","TRANSLATE_AVAR","IMAGE_SRC"},null, null, null, null, null);
         while (cursorCount.moveToNext()) {
             System.out.println(
                     "id: " + cursorCount.getInt(0)+ "\n"
                             + "Word: " + cursorCount.getString(1)+ "\n"
                             + "Translate: " + cursorCount.getString(2)+ "\n"
                             + "Translate laksy: " + cursorCount.getString(3)+ "\n"
-                            + "Src: " + cursorCount.getString(4)+ "\n" );
+                            + "Translate avar: " + cursorCount.getString(4)+ "\n"
+                            + "Src: " + cursorCount.getString(5)+ "\n" );
         }
     }
     public int setMaxRand() {

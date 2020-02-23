@@ -104,8 +104,10 @@ public class activityTest extends AppCompatActivity {
         freeX();
         if (SetLanguage.language.equals("lezgi") ) {
             cursor = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(x)}, null, null, null);
-        } else {
-            cursor = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE_LAKSY", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(x)}, null, null, null);
+        } else if(SetLanguage.language.equals("laksy")){
+            cursor = db.query("WORDS", new String[]{"_id", "WORD","TRANSLATE_LAKSY", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(x)}, null, null, null);
+        } else if(SetLanguage.language.equals("avar")) {
+            cursor = db.query("WORDS", new String[]{"_id", "WORD","TRANSLATE_AVAR", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(x)}, null, null, null);
         }
         if (cursor.moveToFirst()) {
             translateTrue = cursor.getString(2);
@@ -165,14 +167,15 @@ public class activityTest extends AppCompatActivity {
     }
 
     public void printBD() {
-        cursorCount = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE","TRANSLATE_LAKSY", "IMAGE_SRC"}, null, null, null, null, null);
+        cursorCount = db.query("WORDS", new String[] {"_id","WORD", "TRANSLATE", "TRANSLATE_LAKSY","TRANSLATE_AVAR","IMAGE_SRC"},null, null, null, null, null);
         while (cursorCount.moveToNext()) {
             System.out.println(
                     "id: " + cursorCount.getInt(0)+ "\n"
                             + "Word: " + cursorCount.getString(1)+ "\n"
                             + "Translate: " + cursorCount.getString(2)+ "\n"
                             + "Translate laksy: " + cursorCount.getString(3)+ "\n"
-                            + "Src: " + cursorCount.getString(4)+ "\n" );
+                            + "Translate avar: " + cursorCount.getString(4)+ "\n"
+                            + "Src: " + cursorCount.getString(5)+ "\n" );
         }
     }
 }

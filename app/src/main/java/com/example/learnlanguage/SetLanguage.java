@@ -13,6 +13,7 @@ public class SetLanguage extends AppCompatActivity {
     Intent intent;
     Button bt1;
     Button bt2;
+    Button bt3;
     boolean canBool = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,7 @@ public class SetLanguage extends AppCompatActivity {
         setContentView(R.layout.activity_set_language);
         bt1 = findViewById(R.id.laksky);
         bt2 = findViewById(R.id.lezgi);
+        bt3 = findViewById(R.id.avar);
     }
 
     public void onClickBtn(View view) {
@@ -35,8 +37,16 @@ public class SetLanguage extends AppCompatActivity {
                 break;
             case R.id.lezgi:
                 if (language.equals("")) {
-                    language= "laksky";
+                    language= "lezgi";
                     bt2.setTextColor(Color.parseColor("#FF5722"));
+                    canBool = true;
+                    break;
+                }
+                break;
+            case R.id.avar:
+                if (language.equals("")) {
+                    language= "avar";
+                    bt3.setTextColor(Color.parseColor("#FF5722"));
                     canBool = true;
                     break;
                 }

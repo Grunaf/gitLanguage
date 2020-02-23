@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-    public void onClick(View v) {
+    public void onClickBt(View v) {
         switch(v.getId()) {
             case R.id.worlds_training:
                 intent = new Intent(this, worldTraining.class);
@@ -23,6 +23,11 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(this, activityTest.class);
                 startActivity(intent);
                 break;
+            case R.id.changelanguage:
+                intent = new Intent(this, SetLanguage.class);
+                SetLanguage.language = "";
+                startActivity(intent);
         }
     }
+
 }
