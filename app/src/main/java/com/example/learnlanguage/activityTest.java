@@ -104,7 +104,7 @@ public class activityTest extends AppCompatActivity {
         freeX();
         if (SetLanguage.language.equals("lezgi") ) {
             cursor = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(x)}, null, null, null);
-        } else if(SetLanguage.language.equals("laksy")){
+        } else if(SetLanguage.language.equals("laksky")){
             cursor = db.query("WORDS", new String[]{"_id", "WORD","TRANSLATE_LAKSY", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(x)}, null, null, null);
         } else if(SetLanguage.language.equals("avar")) {
             cursor = db.query("WORDS", new String[]{"_id", "WORD","TRANSLATE_AVAR", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(x)}, null, null, null);
@@ -173,7 +173,7 @@ public class activityTest extends AppCompatActivity {
                     "id: " + cursorCount.getInt(0)+ "\n"
                             + "Word: " + cursorCount.getString(1)+ "\n"
                             + "Translate: " + cursorCount.getString(2)+ "\n"
-                            + "Translate laksy: " + cursorCount.getString(3)+ "\n"
+                            + "Translate laksky: " + cursorCount.getString(3)+ "\n"
                             + "Translate avar: " + cursorCount.getString(4)+ "\n"
                             + "Src: " + cursorCount.getString(5)+ "\n" );
         }

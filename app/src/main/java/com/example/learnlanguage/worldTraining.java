@@ -149,7 +149,7 @@ public class worldTraining extends AppCompatActivity {
         freeX();
         if (SetLanguage.language.equals("lezgi") ) {
             cursor = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(x)}, null, null, null);
-        } else if(SetLanguage.language.equals("laksy")){
+        } else if(SetLanguage.language.equals("laksky")){
             cursor = db.query("WORDS", new String[]{"_id", "WORD","TRANSLATE_LAKSY", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(x)}, null, null, null);
         } else if(SetLanguage.language.equals("avar")) {
             cursor = db.query("WORDS", new String[]{"_id", "WORD","TRANSLATE_AVAR", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(x)}, null, null, null);
@@ -175,7 +175,7 @@ public class worldTraining extends AppCompatActivity {
                 } else {
                     if (SetLanguage.language.equals("lezgi") ) {
                         cursor2 = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand1)}, null, null, null);
-                    } else if(SetLanguage.language.equals("laksy")){
+                    } else if(SetLanguage.language.equals("laksky")){
                         cursor2 = db.query("WORDS", new String[]{"_id", "WORD","TRANSLATE_LAKSY", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand1)}, null, null, null);
                     } else if(SetLanguage.language.equals("avar")) {
                         cursor2 = db.query("WORDS", new String[]{"_id", "WORD","TRANSLATE_AVAR", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand1)}, null, null, null);
@@ -195,7 +195,7 @@ public class worldTraining extends AppCompatActivity {
                 } else if ((rand2 != x) & (rand2 != rand1)) {
                     if (SetLanguage.language.equals("lezgi") ) {
                         cursor3 = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand2)}, null, null, null);
-                    } else if(SetLanguage.language.equals("laksy")){
+                    } else if(SetLanguage.language.equals("laksky")){
                         cursor3 = db.query("WORDS", new String[]{"_id", "WORD","TRANSLATE_LAKSY", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand2)}, null, null, null);
                     } else if(SetLanguage.language.equals("avar")) {
                         cursor3 = db.query("WORDS", new String[]{"_id", "WORD","TRANSLATE_AVAR", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand2)}, null, null, null);
@@ -238,7 +238,7 @@ public class worldTraining extends AppCompatActivity {
                     "id: " + cursorCount.getInt(0)+ "\n"
                             + "Word: " + cursorCount.getString(1)+ "\n"
                             + "Translate: " + cursorCount.getString(2)+ "\n"
-                            + "Translate laksy: " + cursorCount.getString(3)+ "\n"
+                            + "Translate laksky: " + cursorCount.getString(3)+ "\n"
                             + "Translate avar: " + cursorCount.getString(4)+ "\n"
                             + "Src: " + cursorCount.getString(5)+ "\n" );
         }
