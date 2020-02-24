@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 class LlanguageDatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "learnLanguage";
-    private static final int DB_VERSION =3;
+    private static final int DB_VERSION =4;
     private String sql = "CREATE TABLE WORDS (_id INTEGER PRIMARY KEY AUTOINCREMENT, WORD TEXT, TRANSLATE TEXT, TRANSLATE_LAKSY TEXT, TRANSLATE_AVAR TEXT, IMAGE_SRC TEXT);";
 
     LlanguageDatabaseHelper(Context context) {
@@ -43,10 +43,7 @@ class LlanguageDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        updateWord(db,3,"Мальчик", "гада", "boy", "оьрч1","вас");
-        updateWord(db,4,"Битва", "йагъйагъун", "battle", "бияву", "рагъ");
-        updateWord(db,7,"Бабочка", "чепелукь", "butterfly", "ч1имуч1али", "к1алк1уч1");
-        updateWord(db,16,"Ладонь", "капан юкь", "palms", "бит1янхъ","огъохъат");
+        updateWord(db,12,"Мёд", "вирт", "honey", "ниц1", "гьоц1о");
     }
 
     @Override

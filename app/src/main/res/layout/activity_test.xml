@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     tools:context=".activityTest">
 
     <TextView
@@ -21,8 +22,9 @@
         android:layout_marginEnd="0dp"
         android:layout_marginRight="0dp"
         android:textAlignment="center"
+        android:textColor="@android:color/white"
         android:textSize="33sp"
-        app:fontFamily="sans-serif-condensed-medium"
+        app:fontFamily="@font/russo_one"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +39,9 @@
         android:gravity="start|center_vertical"
         android:inputType="text"
         android:paddingLeft="15dp"
+        android:textColor="@android:color/white"
         android:textSize="24sp"
+        android:fontFamily="@font/kelly_slab"
         tools:layout_editor_absoluteX="99dp"
         tools:layout_editor_absoluteY="394dp" />
 
@@ -48,25 +52,29 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="182dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
+        android:layout_marginTop="222dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
         android:gravity="center"
-        android:textSize="24sp"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        app:fontFamily="@font/kelly_slab"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/HeaderTest" />
 
-    <Button
+    <ImageView
         android:id="@+id/btNext"
-        android:layout_width="wrap_content"
-        android:layout_height="64dp"
+        android:layout_width="182dp"
+        android:layout_height="53dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="47dp"
+        android:layout_marginBottom="52dp"
         android:onClick="updateValues"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/verify"
         android:text="Проверить"
         android:textSize="19sp" />
 

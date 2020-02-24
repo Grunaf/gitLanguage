@@ -1,56 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
+    android:background="@drawable/bg"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:orientation="vertical" >
+    <ImageView
+        android:id="@+id/words_training"
+        android:layout_width="216dp"
+        android:layout_height="123dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="184dp"
+        android:onClick="onClickBt"
+        android:scaleType="fitEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/word_training" />
 
-        <Button
-            android:id="@+id/worlds_training"
-            android:layout_width="184dp"
-            android:layout_height="129dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="300px"
-            android:onClick="onClickBt"
-            android:text="Словарная тренировка"
-            android:textColor="#F44336"
-            android:textSize="20sp" />
+    <ImageView
+        android:id="@+id/test"
+        android:layout_width="216dp"
+        android:layout_height="123dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="60dp"
+        android:onClick="onClickBt"
+        android:scaleType="fitEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/words_training"
+        app:srcCompat="@drawable/test" />
 
-        <Button
-            android:id="@+id/Test"
-            android:layout_width="match_parent"
-            android:layout_height="129dp"
-            android:layout_gravity="center"
-            android:onClick="onClickBt"
-            android:text="Тест"
-            android:textColor="#F44336"
-            android:textSize="20sp" />
-
-    </LinearLayout>
-
-    <Button
+    <ImageView
         android:id="@+id/changelanguage"
-        android:layout_width="108dp"
-        android:layout_height="wrap_content"
+        android:layout_width="74dp"
+        android:layout_height="80dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="23dp"
-        android:layout_marginLeft="23dp"
-        android:layout_marginTop="25dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginBottom="28dp"
         android:onClick="onClickBt"
-        android:text="Изменить язык"
-        android:textColor="#F44336"
-        android:textSize="14sp" />
+        android:scaleType="fitEnd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/back" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

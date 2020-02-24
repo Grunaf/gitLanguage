@@ -17,7 +17,6 @@ import android.widget.TextView;
 import java.util.Random;
 
 public class worldTraining extends AppCompatActivity {
-    public static boolean testOrTraining = false;
     Intent intent;
     Random random = new Random();
     SQLiteOpenHelper langDatebaseHelper;
@@ -127,9 +126,9 @@ public class worldTraining extends AppCompatActivity {
     public void updateValues(View v) {
         if(updateBool) {
             System.out.println("Ok");
-            bt1.setTextColor(Color.BLACK);
-            bt2.setTextColor(Color.BLACK);
-            bt3.setTextColor(Color.BLACK);
+            bt1.setTextColor(Color.WHITE);
+            bt2.setTextColor(Color.WHITE);
+            bt3.setTextColor(Color.WHITE);
             bt1.setText("");
             bt2.setText("");
             bt3.setText("");
@@ -138,7 +137,6 @@ public class worldTraining extends AppCompatActivity {
             canBool = true;
         } else {
             updateBool = true;
-            testOrTraining = true;
             startActivity(intent);
             id_arr = 0;
         }
@@ -168,10 +166,10 @@ public class worldTraining extends AppCompatActivity {
             } else {
                 bt3.setText(translateTrue);
             }
-            rand1 = setMaxRand();
+            rand1 = random.nextInt(count)+1;
             while (true) {
                 if (rand1 == x) {
-                    rand1 = setMaxRand();
+                    rand1 = random.nextInt(count)+1;
                 } else {
                     if (SetLanguage.language.equals("lezgi") ) {
                         cursor2 = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand1)}, null, null, null);
@@ -188,10 +186,10 @@ public class worldTraining extends AppCompatActivity {
                 translate2 = cursor2.getString(2);
                 setValueBt(translate2);
             }
-            rand2 = setMaxRand();
+            rand2 = random.nextInt(count)+1;
             while (true) {
                 if ((rand2 == x) | (rand2 == rand1)) {
-                    rand2 = setMaxRand();
+                    rand2 = random.nextInt(count)+1;
                 } else if ((rand2 != x) & (rand2 != rand1)) {
                     if (SetLanguage.language.equals("lezgi") ) {
                         cursor3 = db.query("WORDS", new String[]{"_id", "WORD", "TRANSLATE", "IMAGE_SRC"}, "_id = ?", new String[]{String.valueOf(rand2)}, null, null, null);
@@ -243,17 +241,17 @@ public class worldTraining extends AppCompatActivity {
                             + "Src: " + cursorCount.getString(5)+ "\n" );
         }
     }
-    public int setMaxRand() {
-        int y;
-        if (maxRand+5 >= count) {
-            y = maxRand - random.nextInt(6);
-        } else {
-            y = random.nextInt(6) + maxRand;
-        }
-        return y;
-    }
+//    public int setMaxRand() {
+//        int y;
+//        if (maxRand+5 >= count) {
+//            y = maxRand - random.nextInt(6);
+//        } else {
+//            y = random.nextInt(6) + maxRand;
+//        }
+//        return y;
+//    }
     public void freeX() {
-        x = setMaxRand();
+        x = random.nextInt(count)+1;
         while (repeatBool) {
             for (int intX : busyX) {
                 System.out.println("IntX " + intX + " x " + x);
@@ -272,7 +270,7 @@ public class worldTraining extends AppCompatActivity {
                 }
                 break;
             } else {
-                x = setMaxRand();
+                x = random.nextInt(count)+1;
             }
             o = 0;
         }

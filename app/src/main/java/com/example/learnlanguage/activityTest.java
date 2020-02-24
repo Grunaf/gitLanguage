@@ -18,7 +18,6 @@ import android.widget.TextView;
 import java.util.Random;
 
 public class activityTest extends AppCompatActivity {
-    public static boolean testOrTraining = false;
     Intent intent;
     Random random = new Random();
     SQLiteOpenHelper langDatebaseHelper;
@@ -34,7 +33,7 @@ public class activityTest extends AppCompatActivity {
     int id_arr = 0, c = 0, count, x, o;
     static int countRight = 0;
     static int countFalse = 0;
-    Button btNext;
+    ImageView btNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,14 +78,13 @@ public class activityTest extends AppCompatActivity {
             if (updateBool) {
                 System.out.println("Ok");
                 verifyValues();
-                btNext.setText("Продолжить");
+                btNext.setImageResource(R.drawable.continied);
                 canBool = true;
                 first = false;
             } else {
                 updateBool = true;
                 first = false;
                 verifyValues();
-                testOrTraining = true;
                 id_arr = 0;
                 startActivity(intent);
             }
@@ -95,7 +93,7 @@ public class activityTest extends AppCompatActivity {
             updateBool = true;
             WordTrue.setText("");
             WordTrue.setTextColor(Color.BLACK);
-            btNext.setText("Проверить");
+            btNext.setImageResource(R.drawable.verify);
             getValuesDB();
         }
     }
